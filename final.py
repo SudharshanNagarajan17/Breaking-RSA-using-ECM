@@ -21,6 +21,8 @@ def multiplicative_inverse(e, phi):
         x1 = x
         d = y1
         y1 = y
+    if(e==0):
+        return -1;
     if temp_phi == 1:
         return d + phi
 
@@ -44,6 +46,9 @@ if __name__ == '__main__':
     print "\nPhi = ",phi
 
     d=multiplicative_inverse(e,phi)
+    if(d==-1):
+        print "Invalid e: e should be relatively prime to phi(n)"
+        exit()
     print "\nd = ",d
 
     print "\nPublic Key {e,n} = {",e,",",n,"}"
