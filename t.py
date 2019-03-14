@@ -1,1 +1,1 @@
-print len(str(36740321338500003079773894554071138305174646797433))
+print len(str("So this is a 60 digit msg"))

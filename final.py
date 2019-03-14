@@ -21,10 +21,10 @@ def multiplicative_inverse(e, phi):
         x1 = x
         d = y1
         y1 = y
-    if(e==0):
-        return -1;
     if temp_phi == 1:
         return d + phi
+    else:
+        return -1
 
 
 if __name__ == '__main__':
