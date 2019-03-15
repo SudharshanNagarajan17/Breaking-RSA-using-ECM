@@ -50,10 +50,10 @@ def is_prime(num):
 
 
 def generate_keypair(p, q):
-    if not (is_prime(p) and is_prime(q)):
+    '''if not (is_prime(p) and is_prime(q)):
         raise ValueError('Both numbers must be prime.')
     elif p == q:
-        raise ValueError('p and q cannot be equal')
+        raise ValueError('p and q cannot be equal')'''
     # n = pq
     n = p * q
 
@@ -114,12 +114,14 @@ if __name__ == '__main__':
     while(1):
         message = raw_input("\nEnter the message to encrypt with your public key: ").upper()
         mlength = len(message)
-        if (nlength <= 2 * mlength):
-            print "Size of m should be less than the size of n"
-            continue
         mess = ''
         for i in message:
             mess = mess + str(ord(i))
+
+        if (n <= int(mess)):
+            print "Size of m should be less than the size of n"
+            continue
+
         encrypted_msg = encrypt(public, int(mess))
 
         print ("\nEncrypting message with private key...")

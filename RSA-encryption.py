@@ -14,11 +14,13 @@ if __name__ == '__main__':
     while(1):
         message = raw_input("\nEnter the message (m): ").upper()
         mlength = len(message)
-        if(nlength <= 2*mlength):
-            print "Size of m should be less than the size of n"
-            continue
         mess = ''
         for i in message:
             mess=mess+str(ord(i))
+
+        if (n <= int(mess)):
+            print "Size of m should be less than the size of n"
+            continue
+
         encrypted_msg = encrypt(public, int(mess))
         print "Encrypted message: ", ''.join(map(lambda x: str(x), encrypted_msg))
