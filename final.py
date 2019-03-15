@@ -1,4 +1,4 @@
-from ECCPrimeFactorization import ecc
+from ECMPrimeFactorization import ecc
 
 
 '''
