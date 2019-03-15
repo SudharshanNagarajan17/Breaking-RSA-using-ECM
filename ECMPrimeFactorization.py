@@ -1458,7 +1458,6 @@ def main(num):
                veb = True
       else:
          if not valid_input(item):
-            print 'I am confused about the following: "%s". Here\'s the help page:' % item
             print
             help()
 
