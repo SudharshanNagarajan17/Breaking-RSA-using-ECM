@@ -109,11 +109,9 @@ if __name__ == '__main__':
     print "Public key {e,n}: ", public, "\nPrivate key {d,n}: ", private
 
     e,n=public
-    nlength = len(str(n))
 
     while(1):
         message = raw_input("\nEnter the message to encrypt with your public key: ").upper()
-        mlength = len(message)
         mess = ''
         for i in message:
             mess = mess + str(ord(i))
@@ -124,7 +122,7 @@ if __name__ == '__main__':
 
         encrypted_msg = encrypt(public, int(mess))
 
-        print ("\nEncrypting message with private key...")
+        print ("\nEncrypting message with public key...")
         print "Encrypted message: ", ''.join(map(lambda x: str(x), encrypted_msg))
 
         print ("\nDecrypting message with private key...")
