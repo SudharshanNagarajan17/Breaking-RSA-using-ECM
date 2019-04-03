@@ -1,4 +1,4 @@
-from ECMPrimeFactorization import ecc
+from ECMPrimeFactorization1 import ecc
 
 
 '''
@@ -29,8 +29,8 @@ def multiplicative_inverse(e, phi):
 
 if __name__ == '__main__':
     print "\nEnter the public key {e,n}:\n"
-    e = int(input("Enter e: "))
-    n = int(input("Enter n: "))
+    e = 471790052526844963746769251621604021308749660942169471265871 #int(input("Enter e: "))
+    n = 491377285914705187972151481382005991662094528466735402854177 #int(input("Enter n: "))
 
     num = str(n)
     e1 = ecc()

@@ -40,7 +40,6 @@ SMALLEST_COUNTEREXAMPLE_FASTPRIME = 2047
 T = (type(mpz(1)), type(1), type(1L))
 DUMMY = 'dummy'
 _12_LOG_2_OVER_49 = 12 * math.log(2) / 49
-RECORD = 1162795072109807846655696105569042240239
 
 class ts:
 
@@ -51,7 +50,6 @@ class ts:
          self.coefficients.append(0)
 
    def add(self, a, b):
-      '''Adds a and b'''
       b_ = b.coefficients[:]
       a_ = a.coefficients[:]
       self.coefficients = []
@@ -67,7 +65,6 @@ class ts:
       self.acc = a.acc
 
    def ev(self, x):
-      '''Returns a(x)'''
       answer = 0
       for i in xrange(len(self.coefficients) - 1, -1, -1):
          answer *= x
@@ -75,7 +72,6 @@ class ts:
       return answer
 
    def evh(self):
-      '''Returns a(1/2)'''
       answer = 0
       for i in xrange(len(self.coefficients) - 1, -1, -1):
          answer >>= 1
@@ -83,7 +79,6 @@ class ts:
       return answer
 
    def evmh(self):
-      '''Returns a(-1/2)'''
       answer = 0
       for i in xrange(len(self.coefficients) - 1, -1, -1):
          answer = - answer >> 1
@@ -91,13 +86,11 @@ class ts:
       return answer
 
    def int(self):
-      '''Replaces a by an integral of a'''
       self.coefficients = [0] + self.coefficients
       for i in xrange(1, len(self.coefficients)):
          self.coefficients[i] /= i
 
    def lindiv(self, a):
-      '''a.lindiv(k) -- sets a/(x-k/2) for integer k'''
       for i in xrange(len(self.coefficients) - 1):
          self.coefficients[i] <<= 1
          self.coefficients[i] /= a
@@ -106,17 +99,14 @@ class ts:
       self.coefficients[-1] /= a
 
    def neg(self):
-      '''Sets a to -a'''
       for i in xrange(len(self.coefficients)):
          self.coefficients[i] = - self.coefficients[i]
 
    def set(self, a):
-      '''a.set(b) sets a to b'''
       self.coefficients = a.coefficients[:]
       self.acc = a.acc
 
    def simp(self):
-      '''Turns a into a type of Taylor series that can be fed into ev, but cannot be computed with further.'''
       for i in xrange(len(self.coefficients)):
          shift = max(0, int(math.log(abs(self.coefficients[i]) + 1) / LOG_2) - 1000)
          self.coefficients[i] = float(self.coefficients[i] >> shift)
@@ -944,12 +934,10 @@ def factors(n, veb, ra, ov, pr):
    for factor in ecm(n, ra, ov, veb, trial_division_bound, pr):
       yield factor
 
-def interactive(veb, ra, ov, pr):
-   print "ECC - Prime Factorization"
-   response = raw_input("\nEnter number to factorize (n): ")
+def interactive(num,veb, ra, ov, pr):
+   response = num
    n = eval(response)
    int(n)
-   print '\nFactoring number %d:' % n
    if n == 0:
       print '0 does not have a well-defined factorization.'
    else:
@@ -963,17 +951,26 @@ def interactive(veb, ra, ov, pr):
       nf = 0
       for factor in factors(n, veb, ra, ov, pr):
          nf = nf + 1
-         print factor
-      print "\nNumber of factors = ", nf
+         if (nf == 1):
+            nfacp = factor
+         elif (nf == 2):
+            nfacq = factor
+      if (nf == 2):
+         return nfacp, nfacq
+      else:
+         return -1, -1
 
-def main():
+def main(num):
    ra = veb = False
-   pr = 1.0
+   pr = 3.0
    ov = DUMMY
-   interactive(veb, ra, ov, pr)
+   nfacp, nfacq = interactive(num, veb, ra, ov, pr)
+   return nfacp, nfacq
 
-if __name__ == '__main__':
-   try:
-      main()
-   except (EOFError, KeyboardInterrupt):
-      sys.exit()
+class ecc:
+   def compute(self,num):
+      try:
+         nfacp, nfacq = main(num)
+         return nfacp,nfacq
+      except (EOFError, KeyboardInterrupt):
+         sys.exit()
