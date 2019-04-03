@@ -1,5 +1,5 @@
 from ECMPrimeFactorization1 import ecc
-
+import multiprocessing
 
 '''
 Euclid's extended algorithm for finding the multiplicative inverse of two numbers
@@ -34,7 +34,26 @@ if __name__ == '__main__':
 
     num = str(n)
     e1 = ecc()
-    p,q=e1.compute(num)
+
+    q1=multiprocessing.Queue()
+
+    p1 = multiprocessing.Process(target=e1.compute, args=(num,1.0,q1))
+    p2 = multiprocessing.Process(target=e1.compute, args=(num,2.0,q1))
+    p3 = multiprocessing.Process(target=e1.compute, args=(num,3.0,q1))
+
+    p1.start()
+    p2.start()
+    p3.start()
+
+    while (p1.is_alive() and p2.is_alive() and p3.is_alive()):
+        a = 1
+
+    p1.terminate()
+    p2.terminate()
+    p3.terminate()
+
+    p=q1.get()
+    q=q1.get()
 
     if(p==-1 and q==-1):
         print "Invalid n : n should be a product of two primes"

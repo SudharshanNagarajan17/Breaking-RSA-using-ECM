@@ -960,17 +960,18 @@ def interactive(num,veb, ra, ov, pr):
       else:
          return -1, -1
 
-def main(num):
+def main(num,pr2):
    ra = veb = False
-   pr = 3.0
+   pr = pr2
    ov = DUMMY
    nfacp, nfacq = interactive(num, veb, ra, ov, pr)
    return nfacp, nfacq
 
 class ecc:
-   def compute(self,num):
+   def compute(self,num,pr2,que):
       try:
-         nfacp, nfacq = main(num)
-         return nfacp,nfacq
+         nfacp, nfacq = main(num,pr2)
+         que.put(nfacp)
+         que.put(nfacq)
       except (EOFError, KeyboardInterrupt):
          sys.exit()
