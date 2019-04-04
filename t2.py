@@ -1,6 +1,5 @@
 import multiprocessing
 
-#print len(str(245841236512478852752909734912575581815967630033049838269083))
 def fun(q,p,que):
     i = q
     k = pow(10,7)

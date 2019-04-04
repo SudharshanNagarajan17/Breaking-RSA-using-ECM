@@ -29,8 +29,8 @@ def multiplicative_inverse(e, phi):
 
 if __name__ == '__main__':
     print "\nEnter the public key {e,n}:\n"
-    e = int(input("Enter e: "))   #471790052526844963746769251621604021308749660942169471265871
-    n = int(input("Enter n: "))   #491377285914705187972151481382005991662094528466735402854177
+    e = int(input("Enter e: "))
+    n = int(input("Enter n: "))
 
     num = str(n)
     e1 = ecc()

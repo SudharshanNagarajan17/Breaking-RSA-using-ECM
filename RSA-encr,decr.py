@@ -92,8 +92,8 @@ def decrypt(pk, ciphertext):
     plain = pow(ciphertext, key, n)
     plaintext=''
     while(plain):
-        plaintext = plaintext+chr((plain%100))
-        plain = plain/100
+        plaintext = plaintext+chr((plain%1000))
+        plain = plain/1000
     plaintext = plaintext[::-1]
     return plaintext
 
@@ -111,10 +111,15 @@ if __name__ == '__main__':
     e,n=public
 
     while(1):
-        message = raw_input("\nEnter the message to encrypt with your public key: ").upper()
+        message = raw_input("\nEnter the message to encrypt with your public key: ")
         mess = ''
         for i in message:
-            mess = mess + str(ord(i))
+            if (ord(i) < 100):
+                mess = mess + '0' + str(ord(i))
+            else:
+                mess = mess + str(ord(i))
+
+        print mess
 
         if (n <= int(mess)):
             print "Size of m should be less than the size of n"

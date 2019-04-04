@@ -5,8 +5,8 @@ def decrypt(pk, ciphertext):
     plain = pow(ciphertext, key, n)
     plaintext=''
     while(plain):
-        plaintext = plaintext+chr((plain%100))
-        plain = plain/100
+        plaintext = plaintext+chr((plain%1000))
+        plain = plain/1000
     plaintext = plaintext[::-1]
     return plaintext
 
