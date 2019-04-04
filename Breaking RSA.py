@@ -1,4 +1,4 @@
-from ECMPrimeFactorization1 import ecc
+from ECMPrimeFactorization import ecc
 import multiprocessing
 
 '''
